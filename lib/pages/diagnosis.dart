@@ -74,72 +74,69 @@ class _DiagnosisState extends State<Diagnosis> {
   }
 
   String hasilpenyakit(List<String> selectedids) {
-    if (selectedids.contains('G1') &&
-        selectedids.contains('G2') &&
-        selectedids.contains('G3') &&
-        selectedids.contains('G4') &&
-        selectedids.contains('G5') &&
-        selectedids.contains('G22') &&
-        selectedids.contains('G26')) {
-      return 'Gastritis, Silahkan pergi ke dokter untuk berkonsultasi cara menanganinya';
-    } else if (selectedids.contains('G1') &&
-        selectedids.contains('G2') &&
-        selectedids.contains('G3') &&
-        selectedids.contains('G4') &&
-        selectedids.contains('G5') &&
-        selectedids.contains('G6') &&
-        selectedids.contains('G8') &&
-        selectedids.contains('G20') &&
-        selectedids.contains('G22') &&
-        selectedids.contains('G26')) {
-      return 'Dipepsia, Silahkan pergi ke dokter untuk berkonsultasi cara menanganinya';
-    } else if (selectedids.contains('G3') &&
-        selectedids.contains('G4') &&
-        selectedids.contains('G5') &&
-        selectedids.contains('G7') &&
-        selectedids.contains('G13') &&
-        selectedids.contains('G14') &&
-        selectedids.contains('G15') &&
-        selectedids.contains('G16') &&
-        selectedids.contains('G17') &&
-        selectedids.contains('G18') &&
-        selectedids.contains('G19') &&
-        selectedids.contains('G21') &&
-        selectedids.contains('G26')) {
-      return 'Gastroesophageal reflux disease (GERD), Silahkan pergi ke dokter untuk berkonsultasi cara menanganinya';
-    } else if (selectedids.contains('G1') &&
-        selectedids.contains('G2') &&
-        selectedids.contains('G3') &&
-        selectedids.contains('G4') &&
-        selectedids.contains('G5') &&
-        selectedids.contains('G6') &&
-        selectedids.contains('G10') &&
-        selectedids.contains('G11') &&
-        selectedids.contains('G12') &&
-        selectedids.contains('G20') &&
-        selectedids.contains('G26')) {
-      return 'Kanker lambung, Silahkan pergi ke dokter untuk berkonsultasi cara menanganinya';
-    } else if (selectedids.contains('G3') &&
-        selectedids.contains('G5') &&
-        selectedids.contains('G6') &&
-        selectedids.contains('G9') &&
-        selectedids.contains('G20') &&
-        selectedids.contains('G21') &&
-        selectedids.contains('G24') &&
-        selectedids.contains('G25') &&
-        selectedids.contains('G26')) {
-      return 'Gastroenteritis, Silahkan pergi ke dokter untuk berkonsultasi cara menanganinya';
-    } else if (selectedids.contains('G3') &&
-        selectedids.contains('G5') &&
-        selectedids.contains('G6') &&
-        selectedids.contains('G10') &&
-        selectedids.contains('G21') &&
-        selectedids.contains('G25') &&
-        selectedids.contains('G26')) {
-      return 'Gastroparesis, Silahkan pergi ke dokter untuk berkonsultasi cara menanganinya';
-    } else {
-      return 'Penyakit tidak diketahui, Silahkan pergi ke dokter untuk mencari tahu penyakit yang anda derita';
+    Map<String, List<String>> diseaseConditions = {
+      'Gastritis': ['G1', 'G2', 'G3', 'G4', 'G5', 'G22', 'G26'],
+      'Dipepsia': [
+        'G1',
+        'G2',
+        'G3',
+        'G4',
+        'G5',
+        'G6',
+        'G8',
+        'G20',
+        'G22',
+        'G26'
+      ],
+      'GERD': [
+        'G3',
+        'G4',
+        'G5',
+        'G7',
+        'G13',
+        'G14',
+        'G15',
+        'G16',
+        'G17',
+        'G18',
+        'G19',
+        'G21',
+        'G26'
+      ],
+      'Kanker lambung': [
+        'G1',
+        'G2',
+        'G3',
+        'G4',
+        'G5',
+        'G6',
+        'G10',
+        'G11',
+        'G12',
+        'G20',
+        'G26'
+      ],
+      'Gastroenteritis': [
+        'G3',
+        'G5',
+        'G6',
+        'G9',
+        'G20',
+        'G21',
+        'G24',
+        'G25',
+        'G26'
+      ],
+      'Gastroparesis': ['G3', 'G5', 'G6', 'G10', 'G21', 'G25', 'G26'],
+    };
+
+    for (var entry in diseaseConditions.entries) {
+      if (selectedids.toSet().containsAll(entry.value.toSet())) {
+        return '${entry.key}, Silahkan pergi ke dokter untuk berkonsultasi cara menanganinya';
+      }
     }
+
+    return 'Penyakit tidak diketahui, Silahkan pergi ke dokter untuk mencari tahu penyakit yang anda derita';
   }
 
   @override
